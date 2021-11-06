@@ -1,0 +1,8 @@
+1, 
+    django-admin startproject studybud
+    django-admin startapp base
+
+    configure base app on studybud settings.py (INSTALLED_APPS)
+        - base.apps.BaseConfig
+    setup templates folder on the root 
+        - register on settings.py TEMPLATES [ BASE_DIR / 'templates']
