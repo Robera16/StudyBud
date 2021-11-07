@@ -1,0 +1,31 @@
+1, 
+    django-admin startproject studybud
+    django-admin startapp base
+
+    configure base app on studybud settings.py (INSTALLED_APPS)
+        - base.apps.BaseConfig
+    setup templates folder on the root 
+        - register on settings.py TEMPLATES [ BASE_DIR / 'templates']
+2, 
+    request - response process
+        1, to main app urls.py, then this maps to specific app urls.py
+        2, app urs.py to specific view
+        3, app view to specific function
+        4, app specific function to specific templates
+
+    the main purpose of giving names to urls is whenever we use this url pattern in some "templates" and if we want to modify url name, we change it onlt inside urls.py because templates use name of the url no the actual url
+    href="/room/{{room.id}} is href="{% url 'room' room.id %}"
+3,
+    null = True : for the database (when the form data saved to databse this field can be empty)
+    blank = True: for the form (when the form submitted this field can be empty)
+
+    Host
+    Room
+    Description
+                    Topic
+
+
+
+
+
+
