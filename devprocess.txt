@@ -24,7 +24,8 @@
     Description
                     Topic
 
-
+4, 
+    dynamic search - when we search by topic or room or username(multiple search parameter)
 
 
 

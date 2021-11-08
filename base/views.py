@@ -1,6 +1,7 @@
 from django import forms
 from django.shortcuts import render, redirect
-from .models import Room
+from django.db.models import Q
+from .models import Room, Topic
 from .forms import RoomForm
 # rooms = [
 #     {'id': 1, 'name': 'Lets learn python'},
@@ -10,8 +11,19 @@ from .forms import RoomForm
 
 
 def home(request):
-    rooms = Room.objects.all()
-    context = {'rooms': rooms}
+    q = request.GET.get('q') if request.GET.get('q') !=None else ''
+    rooms = Room.objects.filter(   # search room by topic, name or description
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q) 
+        ) 
+    # whatever value we have in topic_name at least it contains q(empty string or query para value)
+    # if topic__name=q, nothing is going to be filtered because q is empty
+    # q=t return both web developmen(t) and javascrip(t)
+    # if we don't have query parameter(q=''), all of topic name match that
+    topics = Topic.objects.all()
+    room_count = rooms.count()
+    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
     return render(request, 'base/home.html', context)
 
 def room(request, pk):
