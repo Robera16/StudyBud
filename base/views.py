@@ -6,11 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic
 from .forms import RoomForm
-# rooms = [
-#     {'id': 1, 'name': 'Lets learn python'},
-#     {'id': 2, 'name': 'Design with me'},
-#     {'id': 3, 'name': 'Frontend developers'},
-# ]
 
 def loginPage(request):
 
@@ -30,9 +25,14 @@ def loginPage(request):
         else:
             messages.error(request, 'Username or password does not exist')
 
-
     context = {}
     return render(request, 'base/login_register.html', context)
+
+
+def logoutUser(request):
+    logout(request) # delete the token, so logout the user
+    return redirect('home')    
+
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') !=None else ''
