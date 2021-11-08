@@ -1,3 +1,5 @@
+username - Roba
+password - qwerty654321
 1, 
     django-admin startproject studybud
     django-admin startapp base
@@ -26,6 +28,8 @@
 
 4, 
     dynamic search - when we search by topic or room or username(multiple search parameter)
+5,
+    when a user first login a session id(token) is created and stored in the database also in the browser
 
 
 
