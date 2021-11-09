@@ -1,5 +1,3 @@
-username - Roba
-password - qwerty654321
 1, 
     django-admin startproject studybud
     django-admin startapp base
@@ -33,4 +31,10 @@ password - qwerty654321
 
 
 
+/*
+username - Roba
+password - qwerty654321
 
+username - Eric
+password - qwerty654321
+*/
