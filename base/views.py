@@ -68,12 +68,14 @@ def home(request):
     # if we don't have query parameter(q=''), all of topic name match that
     topics = Topic.objects.all()
     room_count = rooms.count()
-    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
+
+    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count, 'room_messages' : room_messages}
     return render(request, 'base/home.html', context)
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all().order_by('-created') # gives all sets of messages specific to room. room and message many to one relationship
+    room_messages = room.message_set.all() # gives all sets of messages specific to room. room and message many to one relationship
     participants = room.participants.all()
     if request.method == 'POST':
         message = Message.objects.create(
