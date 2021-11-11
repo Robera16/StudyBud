@@ -27,7 +27,7 @@ class Room(models.Model):
         return self.name
 
 
-class Message(models.Model):   # user and room can have many message
+class Message(models.Model): # user and room can have many message(user,room parent of message)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default = '')
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     body = models.TextField()

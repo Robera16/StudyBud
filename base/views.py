@@ -75,7 +75,9 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all() # gives all sets of messages specific to room. room and message many to one relationship
+    room_messages = room.message_set.all() # gives all sets of messages specific to room. room and message many to one relationship, room -> parent, message -> child
+    # in the Messages model their is room as a foreign key, so a room can have many messages
+    # the above request is to get all the messages in that room
     participants = room.participants.all()
     if request.method == 'POST':
         message = Message.objects.create(
@@ -88,6 +90,17 @@ def room(request, pk):
 
     context = {'room': room, 'room_messages': room_messages, 'participants' : participants}
     return render(request, 'base/room.html', context)
+
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk) # user(host)
+    rooms = user.room_set.all()
+    room_messages = user.message_set.all()
+    topics = Topic.objects.all()
+    # in the Room model we have user(host) as a foreign key, so a user can have many rooms
+    # the above request is to get all the rooms of that user
+    context = {'user' : user, 'rooms' : rooms, 'room_messages' : room_messages, 'topics': topics}
+    return render(request, 'base/profile.html', context)
 
 
 @login_required(login_url='login')
